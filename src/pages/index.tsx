@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { InferGetServerSidePropsType } from 'next';
-import clientPromise from '../lib/mongodb';
+import dbConnect from '../lib/mongodb';
 
 export default function Home({
   isConnected,
@@ -27,7 +27,7 @@ export default function Home({
 
 export async function getServerSideProps(context) {
   try {
-    await clientPromise;
+    const conn = await dbConnect();
 
     return {
       props: { isConnected: true },
